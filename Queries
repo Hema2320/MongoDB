@@ -1,0 +1,281 @@
+1)Find all the topics and tasks which are thought in the month of October
+>use topics
+switched to db topics
+>db.user.insertMany([
+{month:"Jan",topics:"introduction to web browser wars, browser, http methods, request and   responsecycle",task:"https://docs.google.com/document/d/1c_u6azJv7AQse45ggGGcre78liwv90s5aBR7tBPo/edit"},
+{month:”Feb",topics:"js array and objects,array and json iteration",task:"https://docs.google.com/document/d/1elpyPltk5DOMq_cpd4kt19ankyDIO29pchjsjsjjwe/edit"},
+{month:"March",topics:"http request and scope,function and return keyword,types of function”,task:"https://docs.google.com/document/d/1TPk3wqxDFi64WyBaAYxNvZ4T9hRJGgvFjw/edit?usp=sharing"}
+])
+>db.user.insertMany([{month:"April",topics:"ES5 vs ES6",task:"https://docs.google.com/document/d/1iza9j-P6zsNOgZ9ZVuNhOIMxdeueAYfaGMPvyWL_icY/edit?=sharing"},
+{month:"May",topics:"HTML",task:"https://github.com/rvsp/HTML-CSS/blob/master/Mini-tasks/001-HTML.md"},
+{month:"June",topics:"HTML&CSS",task:"https://github.com/rvsp/html-CSS/”}])
+
+>db.user.insertMany([{month:"July",topics:"Responsive web design",task:"https://github.com/rvsp/HTML-CSS/tree/master/tasks"},
+{month:"August",topics:"document vs window,windowcommon util functions",task:"https://docs.google.com/document/d/1o8ywcb_gay5rZk1_mNkZ9GeYjLeom_dYmcVN3Mb2ws/edit?usp=drivesdk"},
+{month:"Sept",topics:"Callback",task:"https://docs.google.com/document/d/1k6jW6TPMqWvzoRAm2tGIOAxKmMRsLt5zaCsdcH_3LM/edit"}])
+
+>db.user.insertMany([{month:"Oct",topics:"MySQL",task:"https://docs.google.com/document/HjKlpMnop_WerjkipErrrop_jyu234/edit"},
+{month:"Nov",topics:"MongoDB",task:"https://github.com/public-apis/public-apis"},
+{month:"Dec",topics:"Completeproject",task:"https://docs.google.com/document/d/1c_u6zaHv7aqhse45GGcrCRe78liww90s5Hw/edit"}])
+
+1)Find all the topics and tasks which are thought in the month of October
+Query:
+
+db.user.find({month:"Oct" })---------------Query
+{ "_id" : ObjectId("61ffec152f86574a780a78c6"), "month" : "Oct", "topics" : "MYSQL", "task" : "https://docs.google.com/document/HjKlpMnop_WerjkipErrrop_jyu234/edit"}
+----------------------------------------------------------------------------------------------
+2)Find all the company drives which appeared between 15 oct-2020 and 31-oct-2020
+>use company_drives
+switched to db company_drives
+> db.user.insertMany([{companyname:"Abc",appeared_user:"Heam",date:15,month:"Oct",year:2020,status:"Selected"},{companyname:"Bcd",appeared_user:"Anil",date:3,month:"April",year:2020,status:"Not selected"},{companyname:"Efg",appeared_user:"Bablu",date:15,month:"Oct",year:2020,status:"Selected"}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("620230083ac856e9d2aab080"),
+                ObjectId("620230083ac856e9d2aab081"),
+                ObjectId("620230083ac856e9d2aab082")
+        ]
+}
+> db.user.insertMany([{companyname:"Opq",appeared_user:"Hemapriya",date:11,month:"Oct",year:2020,status:"Selected"},{companyname:"Lmn",appeared_user:"Babarazam",date:3,month:"April",year:2020,status:"Not selected"},{companyname:"Hij",appeared_user:"Bablu",date:31,month:"Oct",year:2020,status:"Selected"}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("6202321b3ac856e9d2aab083"),
+                ObjectId("6202321b3ac856e9d2aab084"),
+                ObjectId("6202321b3ac856e9d2aab085")
+        ]
+}
+> db.user.insertMany([{companyname:"Wxyz",appeared_user:"Holder",date:11,month:"Oct",year:2020,status:"Selected"},{companyname:"Utvw",appeared_user:"Pollard",date:5,month:"April",year:2020,status:"Not selected"},{companyname:"Rst",appeared_user:"Umesh",date:29,month:"Oct",year:2020,status:"Selected"}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("620232b13ac856e9d2aab086"),
+                ObjectId("620232b13ac856e9d2aab087"),
+                ObjectId("620232b13ac856e9d2aab088")
+        ]
+}
+> db.user.insertMany([{companyname:"Wuvt",appeared_user:"Harshal",date:15,month:"Oct",year:2020,status:"Selected"},{companyname:"Utvw",appeared_user:"Pollard",date:5,month:"May",year:2020,status:"Not selected"},{companyname:"Zxy",appeared_user:"Hooda",date:29,month:"Oct",year:2020,status:"Selected"}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("6202337f3ac856e9d2aab089"),
+                ObjectId("6202337f3ac856e9d2aab08a"),
+                ObjectId("6202337f3ac856e9d2aab08b")
+        ]
+}
+> db.user.insertMany([{companyname:"Wuvt",appeared_user:"Not appeared",date:15,month:"Oct",year:2020,status:"Not Selected"},{companyname:"Utvw",appeared_user:"Not appeared",date:5,month:"May",year:2020,status:"Not selected"},{companyname:"Zxy",appeared_user:"Not apperared",date:29,month:"Oct",year:2020,status:"Not Selected"}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("620234493ac856e9d2aab08c"),
+                ObjectId("620234493ac856e9d2aab08d"),
+                ObjectId("620234493ac856e9d2aab08e")
+        ]
+} Find all the company drives which appeared between 15 oct-2020 and 31-oct-2020
+
+> db.user.find({$or:[{appeared_user:{$eq:"Not selected"}},{status:{$eq:"Selected"}}]})-------------------------------Query
+{ "_id" : ObjectId("620230083ac856e9d2aab080"), "companyname" : "Abc", "appeared_user" : "Heam", "date" : 15, "month" : "Oct", "year" : 2020, "status" : "Selected" }
+{ "_id" : ObjectId("620230083ac856e9d2aab082"), "companyname" : "Efg", "appeared_user" : "Bablu", "date" : 15, "month" : "Oct", "year" : 2020, "status" : "Selected" }
+{ "_id" : ObjectId("6202321b3ac856e9d2aab083"), "companyname" : "Opq", "appeared_user" : "Hemapriya", "date" : 11, "month" : "Oct", "year" : 2020, "status" : "Selected" }
+{ "_id" : ObjectId("6202321b3ac856e9d2aab085"), "companyname" : "Hij", "appeared_user" : "Bablu", "date" : 31, "month" : "Oct", "year" : 2020, "status" : "Selected" }
+{ "_id" : ObjectId("620232b13ac856e9d2aab086"), "companyname" : "Wxyz", "appeared_user" : "Holder", "date" : 11, "month" : "Oct", "year" : 2020, "status" : "Selected" }
+{ "_id" : ObjectId("620232b13ac856e9d2aab088"), "companyname" : "Rst", "appeared_user" : "Umesh", "date" : 29, "month" : "Oct", "year" : 2020, "status" : "Selected" }
+{ "_id" : ObjectId("6202337f3ac856e9d2aab089"), "companyname" : "Wuvt", "appeared_user" : "Harshal", "date" : 15, "month" : "Oct", "year" : 2020, "status" : "Selected" }
+{ "_id" : ObjectId("6202337f3ac856e9d2aab08b"), "companyname" : "Zxy", "appeared_user" : "Hooda", "date" : 29, "month" : "Oct", "year" : 2020, "status" : "Selected" }
+----------------------------------------------------------------------------------------------
+
+3)Find all the company drives and students who are appeared for the placement.
+>db.user.find({$and:[{month:{$eq:"Oct"}},{year:{$eq:2020}},{date:{$gte:15}}]})------------------------------------------Query
+{ "_id" : ObjectId("620230083ac856e9d2aab080"), "companyname" : "Abc", "appeared_user" : "Heam", "date" : 15, "month" : "Oct", "year" : 2020, "status" : "Selected" }
+{ "_id" : ObjectId("620230083ac856e9d2aab082"), "companyname" : "Efg", "appeared_user" : "Bablu", "date" : 15, "month" : "Oct", "year" : 2020, "status" : "Selected" }
+{ "_id" : ObjectId("6202321b3ac856e9d2aab085"), "companyname" : "Hij", "appeared_user" : "Bablu", "date" : 31, "month" : "Oct", "year" : 2020, "status" : "Selected" }
+{ "_id" : ObjectId("620232b13ac856e9d2aab088"), "companyname" : "Rst", "appeared_user" : "Umesh", "date" : 29, "month" : "Oct", "year" : 2020, "status" : "Selected" }
+{ "_id" : ObjectId("6202337f3ac856e9d2aab089"), "companyname" : "Wuvt", "appeared_user" : "Harshal", "date" : 15, "month" : "Oct", "year" : 2020, "status" : "Selected" }
+{ "_id" : ObjectId("6202337f3ac856e9d2aab08b"), "companyname" : "Zxy", "appeared_user" : "Hooda", "date" : 29, "month" : "Oct", "year" : 2020, "status" : "Selected" }
+{ "_id" : ObjectId("620234493ac856e9d2aab08c"), "companyname" : "Wuvt", "appeared_user" : "Not appeared", "date" : 15, "month" : "Oct", "year" : 2020, "status" : "Not Selected" }
+{ "_id" : ObjectId("620234493ac856e9d2aab08e"), "companyname" : "Zxy", "appeared_user" : "Not apperared", "date" : 29, "month" : "Oct", "year" : 2020, "status" : "Not Selected" }
+--------------------------------------------------------------------------------------------
+4)Find the number of problems solved by the user in codekata
+>use codekata
+switched to db codekata
+> db.user.insertMany([{id:1,name:"Priya",solved:18,pending:12,total:30},{id:2,name:"Dhanush",solved:12,pending:18,total:30},{id:3,name:"Agalya",solved:10,pending:20,total:30},{id:4,name:"Dhana",solved:15,pending:15,total:30},{id:5,name:"Ravi",solved:8,pending:22,total:30}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("6200d02e655fcc01957650df"),
+                ObjectId("6200d02e655fcc01957650e0"),
+                ObjectId("6200d02e655fcc01957650e1"),
+                ObjectId("6200d02e655fcc01957650e2"),
+                ObjectId("6200d02e655fcc01957650e3")
+        ]
+}
+> db.user.insertMany([{id:6,name:"Kayal",solved:25,pending:5,total:30},{id:7,name:"Saral",solved:14,pending:16,total:30},{id:8,name:"Suman",solved:7,pending:23,total:30},{id:9,name:"Kiran",solved:6,pending:24,total:30},{id:10,name:"Bablu",solved:17,pending:13,total:30}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("6200d218655fcc01957650e4"),
+                ObjectId("6200d218655fcc01957650e5"),
+                ObjectId("6200d218655fcc01957650e6"),
+                ObjectId("6200d218655fcc01957650e7"),
+                ObjectId("6200d218655fcc01957650e8")
+        ]
+}
+> db.user.find({},{id:1,name:1,solved:1})-------------------------------------Query
+{ "_id" : ObjectId("6200d02e655fcc01957650df"), "id" : 1, "name" : "Priya", "solved" : 18 }
+{ "_id" : ObjectId("6200d02e655fcc01957650e0"), "id" : 2, "name" : "Dhanush", "solved" : 12 }
+{ "_id" : ObjectId("6200d02e655fcc01957650e1"), "id" : 3, "name" : "Agalya", "solved" : 10 }
+{ "_id" : ObjectId("6200d02e655fcc01957650e2"), "id" : 4, "name" : "Dhana", "solved" : 15 }
+{ "_id" : ObjectId("6200d02e655fcc01957650e3"), "id" : 5, "name" : "Ravi", "solved" : 8 }
+{ "_id" : ObjectId("6200d218655fcc01957650e4"), "id" : 6, "name" : "Kayal", "solved" : 25 }
+{ "_id" : ObjectId("6200d218655fcc01957650e5"), "id" : 7, "name" : "Saral", "solved" : 14 }
+{ "_id" : ObjectId("6200d218655fcc01957650e6"), "id" : 8, "name" : "Suman", "solved" : 7 }
+{ "_id" : ObjectId("6200d218655fcc01957650e7"), "id" : 9, "name" : "Kiran", "solved" : 6 }
+{ "_id" : ObjectId("6200d218655fcc01957650e8"), "id" : 10, "name" : "Bablu", "solved" : 17 }
+-----------------------------------------------------------------------
+5)Find all the mentors with who has the mentee's count more than 15
+use mentors
+switched to db mentors
+> db.user.insertMany([{mentorsname:"Nagarajan",batch:"B30WD",mentees_count:20,email:"naga@gmail.com"},{mentorsname:"Lavish",batch:"B29WE",mentees_count:15,email:"lavish@gmail.com"},{mentorsname:"Suman",batch:"B30WE",email:"suman@gmail.com"}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("6200b6e2655fcc01957650d4"),
+                ObjectId("6200b6e2655fcc01957650d5"),
+                ObjectId("6200b6e2655fcc01957650d6")
+        ]
+}
+> db.user.insertMany([{mentorsname:"Mohammed",batch:"B24WE",count:30,email:"mohamedd@gmail.com"},{mentorsname:"Dviya",batch:"B39WD",email:"divya@gmail.com"},{mentorsname:"Uma",batch:"B31WE",count:15,email:"uma@gmail.com"}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("6200c512655fcc01957650d7"),
+                ObjectId("6200c512655fcc01957650d8"),
+                ObjectId("6200c512655fcc01957650d9")
+        ]
+}
+> db.user.insertMany([{mentorsname:"Chandramohan",batch:"B23WD",count:23,email:"chand@gmail.com"},{mentorsname:"Anil",batch:"B23WE",count:15,email:"anik@gmail.com"},{mentorsname:"Santhos",batch:"B25WE",email:"santhos@gmail.com"},{mentorname:"Abi",batch:"26WD",count:32,email:"abi@gmail.com"}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("6200c6eb655fcc01957650da"),
+                ObjectId("6200c6eb655fcc01957650db"),
+                ObjectId("6200c6eb655fcc01957650dc"),
+                ObjectId("6200c6eb655fcc01957650dd")
+        ]
+}
+> db.user.insert({mentorsname:"Mohan",batch:"B32WE",count:12,email:"mohan@gmail.com"})
+WriteResult({ "nInserted" : 1 })
+> db.user.updateMany({},{$rename:{"count":"mentees_count"}})
+
+Find all the mentors with who has the mentee's count more than 15
+Query:
+
+>db.user.find({mentees_count:{$gt:[15]}})----------------------------------------Query
+{ "_id" : ObjectId("6200b6e2655fcc01957650d4"),"mentorsname" : "Nagarajan","batch" : "B30WD", "mentees_count" : 20,"email" : "naga@gmail.com"}
+{ "_id" : ObjectId("6200b6e2655fcc01957650d5"), "mentorsname" : "Lavish", "batch" : "B29WE", "mentees_count" : 15, "email" : "lavish@gmail.com" }
+{ "_id" : ObjectId("6200c512655fcc01957650d7"),"mentorsname" : "Mohammed","batch" : "B24WE","email" : "mohamedd@gmail.com","mentees_count" : 30}
+{ "_id" : ObjectId("6200c512655fcc01957650d9"), "mentorsname" : "Uma", "batch" : "B31WE", "email" : "uma@gmail.com", "mentees_count" : 15 }
+{ "_id" : ObjectId("6200c6eb655fcc01957650db"), "mentorsname" : "Anil", "batch" : "B23WE", "email" : "anik@gmail.com", "mentees_count" : 15 } 
+{ "_id" : ObjectId("6200c6eb655fcc01957650dd"), "mentorname" : "Abi",, "batch" : "26WD","email" : "abi@gmail.com","mentees_count" : 32}
+----------------------------------------------------------------------------
+6)Find the number of users who are absent and task is not submitted  between 15 oct-2020 and 31-oct-2020
+> db.user.insertMany([{id:1,name:"Hema",attendance:"Present",submitted_from:"15 oct 2020",sbumitted_to:"31 cot 2020",status:"Completed"},{id:2,name:"Dharsh",attendance:"Absent",submitted_from:"Not submitted",submitted_to:"Not_submitted",status:"Incompelted"},{id:3,name:"Ajith",attendance:"Present",submitted_from:"15 oct 2020",submitted_to:"Submitted",status:"completed"}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("620218a03ac856e9d2aab076"),
+                ObjectId("620218a03ac856e9d2aab077"),
+                ObjectId("620218a03ac856e9d2aab078")
+        ]
+}
+> db.user.insertMany([{id:4,name:"Hema",attendance:"Present",submitted_from:"15 oct 2020",sbumitted_to:"31 cot 2020",status:"Completed"},{id:5,name:"Dharsh",attendance:"Absent",submitted_from:"Not submitted",submitted_to:"Not_submitted",status:"Incompleted"},{id:6,name:"Arjun",attendance:"Absent",submitted_from:"Not submitted",submited_to:"Not submitted",status:"completed"}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("620219463ac856e9d2aab079"),
+                ObjectId("620219463ac856e9d2aab07a"),
+                ObjectId("620219463ac856e9d2aab07b")
+        ]
+}
+> db.user.insertMany([{id:7,name:"Gunam",attendance:"Present",submitted_from:"15 oct 2020",sbumitted_to:"31 cot 2020",status:"Completed"},{id:8,name:"Washington",attendance:"Absent",submitted_from:"Not submitted",submitted_to:"Not_submitted",status:"Incompleted"},{id:9,name:"Saral",attendance:"Absent",submitted_from:"Not submitted",submited_to:"Not submitted",status:"completed"}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("620219ba3ac856e9d2aab07c"),
+                ObjectId("620219ba3ac856e9d2aab07d"),
+                ObjectId("620219ba3ac856e9d2aab07e")
+        ]
+}
+> db.user.insert({id:10,name:"Smirti",attendance:"Absent",submitted_from:"Not submitted",submitted_to:"Not submitted",status:"Incompleted"})
+Find the number of users who are absent and task is not submitted  between 15 oct-2020 and 31-oct-2020
+Query:
+
+> db.user.find({$and:[{attendance:{$eq:"Absent"}},{status:"Incompleted"}]})-------------------------------Query
+{ "_id" : ObjectId("620218a03ac856e9d2aab077"), "id" : 2, "name" : "Amir", "attendance" : "Absent", "submitted_from" : "Not submitted", "submitted_to" : "Not_submitted", "status" : "Incompleted" }
+{ "_id" : ObjectId("620219463ac856e9d2aab07a"), "id" : 5, "name" : "Dharsh", "attendance" : "Absent", "submitted_from" : "Not submitted", "submitted_to" : "Not_submitted", "status" : "Incompleted" }
+{ "_id" : ObjectId("620219ba3ac856e9d2aab07d"), "id" : 8, "name" : "Washington", "attendance" : "Absent", "submitted_from" : "Not submitted", "submitted_to" : "Not_submitted", "status" : "Incompleted" }
+{ "_id" : ObjectId("62021b903ac856e9d2aab07f"), "id" : 10, "name" : "Smirti", "attendance" : "Absent", "submitted_from" : "Not submitted", "submitted_to" : "Not submitted", "status" : "Incompleted" }
+---------------------------------------------------------------------------------------------------------------------
+>use users
+switched to db users
+> db.user.insertMany([{id:1,name:"Jai",email:"jai@gmail.com",gender:"Male"  },{id:2,name:"Logi",email:"logi@gmail.com",gender:"Female"},{id:3,name:"Amul",email:"amulgmail.com",gender:"Male"}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("62024da13ac856e9d2aab08f"),
+                ObjectId("62024da13ac856e9d2aab090"),
+                ObjectId("62024da13ac856e9d2aab091")
+        ]
+}
+> db.user.insertMany([{id:4,name:"Jaisree",email:"jaisree@gmail.com",gender:"Female"  },{id:2,name:"Thomas",email:"thomas@gmail.com",gender:"Male"},{id:3,name:"Yuvan",email:"yuvangmail.com",gender:"Male"}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("62024e723ac856e9d2aab092"),
+                ObjectId("62024e723ac856e9d2aab093"),
+                ObjectId("62024e723ac856e9d2aab094")
+        ]
+}
+> db.user.find().pretty()
+{
+        "_id" : ObjectId("62024da13ac856e9d2aab08f"),
+        "id" : 1,
+        "name" : "Jai",
+        "email" : "jai@gmail.com",
+        "gender" : "Male"
+}
+{
+        "_id" : ObjectId("62024da13ac856e9d2aab090"),
+        "id" : 2,
+        "name" : "Logi",
+        "email" : "logi@gmail.com",
+        "gender" : "Female"
+}
+{
+        "_id" : ObjectId("62024da13ac856e9d2aab091"),
+        "id" : 3,
+        "name" : "Amul",
+        "email" : "amulgmail.com",
+        "gender" : "Male"
+}
+{
+        "_id" : ObjectId("62024e723ac856e9d2aab092"),
+        "id" : 4,
+        "name" : "Jaisree",
+        "email" : "jaisree@gmail.com",
+        "gender" : "Female"
+}
+{
+        "_id" : ObjectId("62024e723ac856e9d2aab093"),
+        "id" : 2,
+        "name" : "Thomas",
+        "email" : "thomas@gmail.com",
+        "gender" : "Male"
+}
+{
+        "_id" : ObjectId("62024e723ac856e9d2aab094"),
+        "id" : 3,
+        "name" : "Yuvan",
+        "email" : "yuvangmail.com",
+        "gender" : "Male"
+}
